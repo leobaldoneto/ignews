@@ -1,10 +1,16 @@
 import type { AppProps } from 'next/app'
-import { Header } from '../components/header';
+
+import { Header } from '../components/header'
+
 import { SessionProvider } from 'next-auth/react'
+import type { Session } from 'next-auth'
 
 import '../styles/global.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({
+  Component, 
+  pageProps: { session, ...pageProps },
+ }: AppProps<{ session: Session }>) {
   return (
     <SessionProvider session={pageProps.session}>
       <Header />
@@ -12,5 +18,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </SessionProvider>
   )
 }
-
-export default MyApp;
