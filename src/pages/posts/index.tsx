@@ -48,8 +48,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const postsArray = response.map(post => {
     const formatedDate = formateDate(post.last_publication_date);
-
-    const contentExcerpt = post.data.content.slice(0, 300).concat('...');
+    const charsToShow = 300
+    const contentExcerpt = post.data.content.slice(0, charsToShow).concat('...');
 
     return {
       slug: post.uid,
