@@ -7,11 +7,11 @@
 <p align="center">Blog de notícias headless e pagamento via stripe</p>
 
 <p align="center">
- <a href="#sobre-o-projeto">Introdução</a> |
+ <a href="#introdução">Introdução</a> |
  <a href="#tecnologias">Tecnologias</a> |
- <a href="#configurações-necessárias">Instalação</a> |
+ <a href="#testando-o-projeto">Execute</a> |
  <a href="#licença">Licença</a> |
- <a href="#autor">Autor</a>
+ <a href="#desenvolvimento">Desenvolvimento</a>
 </p>
 
 ## Introdução
