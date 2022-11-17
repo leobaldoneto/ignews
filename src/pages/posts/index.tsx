@@ -4,7 +4,17 @@ import Head from 'next/head';
 import { createClient } from '../../services/prismic';
 import styles from './styles.module.scss'
 
-export default function posts({ postsArray }) {
+interface Posts {
+  slug: string,
+  title: string,
+  updatedAt: string,
+  excerpt: string
+}
+interface PostProps {
+  postsArray: Posts[]
+}
+
+export default function posts({ postsArray }: PostProps) {
   return (
     <>
       <Head>
@@ -13,14 +23,13 @@ export default function posts({ postsArray }) {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          {postsArray.map((post) => {
-            return (<a href='#' key={post.id}>
-              <time>{post.first_publication_date}</time>
+          {postsArray.map(post => {
+            return (<a href='#' key={post.slug}>
+              <time>{post.updatedAt}</time>
               <strong>{post.title}</strong>
-              <p>{post.content}</p>
+              <p>{post.excerpt}</p>
             </a>)
-          })
-          } 
+          }) } 
         </div>
       </main>
     </>
@@ -35,9 +44,9 @@ export const getStaticProps: GetStaticProps = async () => {
     pageSize: 100,
   });
 
-  const postsArray = response.map((post) => {
+  const postsArray = response.map(post => {
     const formatedDate = new Date(
-      post.first_publication_date
+      post.last_publication_date
       ).toLocaleDateString(
         'pt-BR',
         {
@@ -45,12 +54,14 @@ export const getStaticProps: GetStaticProps = async () => {
           timeZone: 'America/Recife'
         }
       );
-    const contentSummary = post.data.content.slice(0, 300).concat('...');
+
+    const contentExcerpt = post.data.content.slice(0, 300).concat('...');
+
     return {
-      id: post.id,
-      first_publication_date: formatedDate,
+      slug: post.uid,
+      updatedAt: formatedDate,
       title: post.data.title,
-      content: contentSummary
+      excerpt: contentExcerpt
     }
   });
 
