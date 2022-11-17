@@ -2,6 +2,7 @@ import { PrismicDocument } from '@prismicio/types';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { createClient } from '../../services/prismic';
+import formateDate from '../../utils/formateDate';
 import styles from './styles.module.scss'
 
 interface Posts {
@@ -45,15 +46,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const postsArray = response.map(post => {
-    const formatedDate = new Date(
-      post.last_publication_date
-      ).toLocaleDateString(
-        'pt-BR',
-        {
-          dateStyle: 'long',
-          timeZone: 'America/Recife'
-        }
-      );
+    const formatedDate = formateDate(post.last_publication_date);
 
     const contentExcerpt = post.data.content.slice(0, 300).concat('...');
 
