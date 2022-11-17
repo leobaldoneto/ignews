@@ -20,7 +20,7 @@ export default NextAuth({
           q.Get(
             q.Intersection([
               q.Match(
-                q.Index('subscription_by_user_id'),
+                q.Index('subscription_by_user_ref'),
                 q.Select(
                   'ref',
                   q.Get(
@@ -36,14 +36,13 @@ export default NextAuth({
                 'active'
               )
             ])
-            
           )
         );
         return {
           ...session,
           activeSubscription: userActiveSubscription
         }
-      } catch {
+      } catch (error) {
         return {
           ...session,
           activeSubscription: null
