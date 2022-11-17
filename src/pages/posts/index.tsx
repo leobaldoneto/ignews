@@ -1,6 +1,7 @@
 import { PrismicDocument } from '@prismicio/types';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { createClient } from '../../services/prismic';
 import formateDate from '../../utils/formateDate';
 import styles from './styles.module.scss'
@@ -24,13 +25,13 @@ export default function posts({ postsArray }: PostProps) {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          {postsArray.map(post => {
-            return (<a href='#' key={post.slug}>
-              <time>{post.updatedAt}</time>
-              <strong>{post.title}</strong>
-              <p>{post.excerpt}</p>
-            </a>)
-          }) } 
+          {postsArray.map(post => (
+            <Link href={`/posts/${post.slug}`} key={post.slug}>
+            <time>{post.updatedAt}</time>
+            <strong>{post.title}</strong>
+            <p>{post.excerpt}</p>
+            </Link>)
+          )} 
         </div>
       </main>
     </>
