@@ -2,7 +2,7 @@
     ig.News - Next.js
 </h1>
 
-ADICIONAR IMAGEM
+![IgnewsHomePage](https://user-images.githubusercontent.com/28495813/202544007-1ea5f0c9-e2cc-4bc4-b7a9-516f58e66633.png)
 
 <p align="center">Blog de notícias headless e pagamento via stripe</p>
 
